@@ -2,6 +2,10 @@
   "name": "kns-contracts",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "deploy-baobab": "npx hardhat run --network baobab scripts/setupDeployment.ts"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
     "@nomiclabs/hardhat-waffle": "^2.0.1",

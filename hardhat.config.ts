@@ -50,7 +50,7 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 300000
   },
-  solidity: "0.8.4",
+  solidity: "0.5.6",
 };
 
 export default config

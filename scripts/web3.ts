@@ -4,15 +4,27 @@ import { ethers, web3 } from "hardhat";
 
 async function main() {
     /***** some nft address *****/
-    const address = "0x22b99ff14b888739547f8f38548a866cc8b3a1bc";
+    const address = "0x3a40844Dc9b63038caA1A4Ac8730D494058BAa3C";
 
     /***** get past events *****/
-    const contract = await ethers.getContractAt('IERC721', address);
-    const eventFilter = contract.filters.Transfer('0x0000000000000000000000000000000000000000');
-    const logs = await contract.queryFilter(eventFilter, 78700000, 'latest');
-    for (const log of logs) {
-        let tokenId = <any>(<any>log.args).tokenId.toNumber();
-    }
+    const contract = await ethers.getContractAt('DSCVote', address);
+
+    const res = await web3.eth.call({
+        to:address,
+        data: web3.eth.abi.encodeFunctionCall({
+            type: "function",
+            name: "owner",
+            inputs:[],
+
+        },[])
+    })
+    console.log(web3.eth.abi.decodeParameter('string',res))
+    console.log("isOwner" + ' : ' + res);
+    // const eventFilter = contract.filters.Transfer('0x0000000000000000000000000000000000000000');
+    // const logs = await contract.queryFilter(eventFilter, 78700000, 'latest');
+    // for (const log of logs) {
+    //     let tokenId = <any>(<any>log.args).tokenId.toNumber();
+    // }
 }
 
 

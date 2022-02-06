@@ -2,9 +2,7 @@ import { Contract } from "ethers";
 import { ethers } from "hardhat";
 
 async function main() {
-    console.log("1")
-    const myContract0 = await ethers.getContractFactory("Ownable");
-    console.log("2")
+    const myContract0 = await ethers.getContractFactory("DSCVote");
 
     const signers = await ethers.getSigners();
     const accounts = signers.map(s => s.address);
