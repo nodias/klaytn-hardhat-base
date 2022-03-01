@@ -1,10 +1,14 @@
 {
-  "name": "kns-contracts",
+  "name": "hardhat-klaytn",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "compile": "npx hardhat compile",
-    "deploy-baobab": "npx hardhat run --network baobab scripts/setupDeployment.ts"
+    "deploy-baobab": "npx hardhat run --network baobab scripts/setupDeployment.ts",
+    "deploy-mainnet": "npx hardhat run --network mainnet scripts/setupDeployment.ts",
+    "deploy-hardhat": "npx hardhat run --network hardhat scripts/setupDeployment.ts",
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
@@ -12,18 +16,19 @@
     "@nomiclabs/hardhat-web3": "^2.0.0",
     "@openzeppelin/contracts": "^4.0.0",
     "@openzeppelin/contracts-upgradeable": "^4.4.0",
-    "@types/chai": "^4.2.21",
-    "@types/mocha": "^9.0.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^16.9.6",
-    "chai": "^4.3.4",
-    "chai-ethers": "^0.0.1",
+    "chai": "^4.3.6",
+    "dotenv": "^16.0.0",
     "eth-ens-namehash": "^2.0.8",
-    "ethers": "https://github.com/kokoa-finance/klaytn_ethers.git",
+    "ethers": "https://github.com/nodias/klaytn_ethers.git",
     "hardhat": "^2.6.4",
     "hardhat-abi-exporter": "^2.3.0",
-    "hardhat-deploy": "https://github.com/kokoa-finance/hardhat-deploy.git",
-    "hardhat-deploy-ethers": "https://github.com/kokoa-finance/hardhat-deploy-ethers.git",
+    "hardhat-deploy": "https://github.com/nodias/hardhat-deploy.git",
+    "hardhat-deploy-ethers": "https://github.com/nodias/hardhat-deploy-ethers.git",
     "solhint": "^3.3.6",
+    "solidity-coverage": "^0.7.20",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3",
     "web3": "^1.0.0-beta.36"

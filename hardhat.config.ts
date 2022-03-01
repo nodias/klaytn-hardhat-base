@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config()
+
 import { HardhatUserConfig, task } from "hardhat/config";
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
@@ -5,26 +8,26 @@ import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-web3";
 import { assert } from "console";
+import "./task/index";
+import "solidity-coverage";
 
-// const ropstenURL: string = "https://ropsten.infura.io/v3/" + process.env.ROPSTEN_INFURA_KEY;
 const accounts: string[] = (process.env.PRIVATE_KEY && process.env.PRIVATE_KEY2) ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY2] : [];
+const kas_auth = "Basic " +
+    Buffer.from(
+        process.env.KAS_ACCESS_ID + ":" + process.env.KAS_ACCESS_SECRET
+    ).toString("base64");
+
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      saveDeployments: true,
+      accounts: { count: 30, accountsBalance: "100000000000000000000000" },
     },
-    // ropsten: {
-    //   url: ropstenURL,
-    //   accounts: accounts,
-    //   gas: 2100000,
-    //   gasPrice: 8000000000,
-    // },
-    cypress: {
+    mainnet: {
       url: 'https://node-api.klaytnapi.com/v1/klaytn',
       httpHeaders: {
         'x-chain-id': '8217',
-        authorization: process.env.KAS_AUTH || '',
+        Authorization: kas_auth,
       },
       chainId: 8217,
       gas: 20000000,
@@ -38,7 +41,7 @@ const config: HardhatUserConfig = {
       chainId: 1001,
       gas: 20000000,
       gasPrice: 25000000000,
-      accounts: ['0xa52c28c8cff0018dfa08238e29c070c6aad36b95314085c6c335110ee8d8940f'],
+      accounts: accounts,
       live: true,
       saveDeployments: true,
     },
@@ -50,7 +53,17 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 300000
   },
-  solidity: "0.5.6",
+  solidity: {
+    version: '0.5.6',
+    settings: {
+      evmVersion: "constantinople",
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  },
+
 };
 
 export default config
